@@ -8,9 +8,9 @@ public class Monster : MonoBehaviour, IHitable
     private float hp;
     private float atk;
     public M_ScriptableObject scriptable;
-    protected Animator animator;
-    protected CharacterController monster;
-    protected GameObject target;
+    public Animator animator;
+    public CharacterController monsterController;
+    public GameObject player;
     public float Hp
     {
         get { return hp; }
@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour, IHitable
             hp = value;
             if (hp <= 0)
             {
-                Die();
+                SetState(new M_DieState(gameObject));
             }
         }
     }
@@ -30,10 +30,10 @@ public class Monster : MonoBehaviour, IHitable
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        monster = GetComponent<CharacterController>();
+        monsterController = GetComponent<CharacterController>();
         SetStaters();
-        target = GameObject.Find("Player");
-        
+        player = GameObject.Find("Player");
+        SetState(new M_MoveState(gameObject));
     }
     private void SetStaters()
     {
@@ -41,9 +41,14 @@ public class Monster : MonoBehaviour, IHitable
         atk = scriptable.atk;
     }
 
-    public void Die()
+    public void SetState(IStater input)
     {
-        animator.SetTrigger("Die");
+        if(curState != null)
+        {
+            curState.Exit();
+        }
+        curState = input;
+        curState.Enter();
     }
 
     public void Hit(float damage)

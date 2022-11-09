@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterBaseState : BaseState
-{ 
+{
+    public Monster monster;
     public MonsterBaseState(GameObject gameObject) : base(gameObject)
     {
+        this.gameObject = gameObject;
+        monster = this.gameObject.GetComponent<Monster>();
     }
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

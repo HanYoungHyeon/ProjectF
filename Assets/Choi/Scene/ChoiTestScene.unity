@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -554,5 +554,48 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 562efda662f9835478f2e66e54186aa8, type: 2}
+    - target: {fileID: 9589072, guid: de1335348572fd44f8ec1ad4aa8f015a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1335348572fd44f8ec1ad4aa8f015a, type: 3}
+--- !u!1 &1968645656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 168864, guid: de1335348572fd44f8ec1ad4aa8f015a, type: 3}
+  m_PrefabInstance: {fileID: 1968645655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1968645657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968645656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edcdc226957c14e4a86484a00e4f8b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptable: {fileID: 11400000, guid: 0fac3e22ed5f54f4980a042e6ae53443, type: 2}
+  animator: {fileID: 0}
+  monsterController: {fileID: 0}
+  player: {fileID: 0}
+--- !u!143 &1968645658
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968645656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 1.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1.56, z: 0}
