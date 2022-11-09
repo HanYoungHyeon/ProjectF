@@ -6,9 +6,14 @@ public class GreenMonster : Monster
 {
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(SetDistanse() < 5)
         {
-            SetState(new M_MoveState(gameObject));
+            transform.forward = player.transform.position;
+            monsterController.SimpleMove(player.transform.position);
+        }
+        else if(SetDistanse() < 2)
+        {
+            SetState(new M_AttackState(gameObject));
         }
         curState.Update();
     }

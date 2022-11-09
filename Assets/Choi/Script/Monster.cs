@@ -11,6 +11,7 @@ public class Monster : MonoBehaviour, IHitable
     public Animator animator;
     public CharacterController monsterController;
     public GameObject player;
+    public float distanse;
     public float Hp
     {
         get { return hp; }
@@ -49,6 +50,12 @@ public class Monster : MonoBehaviour, IHitable
         }
         curState = input;
         curState.Enter();
+    }
+
+    public float SetDistanse()
+    {
+        distanse = Vector3.Distance(transform.position, player.transform.position);
+        return distanse;
     }
 
     public void Hit(float damage)
