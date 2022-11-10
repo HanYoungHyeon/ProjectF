@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseState : IStater
 {
-    GameObject gameObject;
+    public GameObject gameObject;
     public BaseState(GameObject gameObject)
     {
         this.gameObject = gameObject;
