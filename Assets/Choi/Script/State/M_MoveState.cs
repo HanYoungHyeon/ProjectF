@@ -10,6 +10,6 @@ public class M_MoveState : MonsterBaseState
 
     public override void Update()
     {
-        monster.monsterController.SimpleMove(monster.player.transform.position * 0.1f);
+        
     }
 }
