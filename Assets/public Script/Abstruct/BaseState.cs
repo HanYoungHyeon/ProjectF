@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class BaseState : IStater
 {
-    public GameObject gameObject;
-    public BaseState(GameObject gameObject)
+    public GameObject gameObj;
+    public BaseState(GameObject game)
     {
-        this.gameObject = gameObject;
+        this.gameObj = game;
     }
     public abstract void Enter();
 

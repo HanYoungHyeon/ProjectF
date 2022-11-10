@@ -9,13 +9,13 @@ public class M_DieState : MonsterBaseState
     }
     public override void Enter()
     {
-        monster.animator.SetTrigger("Die");
+        monster.animator.SetBool("isDie", monster.isDead);
     }
     public override void Update()
     {
         if(monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >=1)
         {
-            MonoBehaviour.Destroy(gameObject);
+            MonoBehaviour.Destroy(gameObj);
         }
     }
 }

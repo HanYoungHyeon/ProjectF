@@ -6,12 +6,18 @@ using UnityEngine;
 public class Monster : MonoBehaviour, IHitable
 {
     private float hp;
-    private float atk;
+    public float atk;
+    [SerializeField]private Transform[] poss;
     public M_ScriptableObject scriptable;
     public Animator animator;
     public CharacterController monsterController;
     public GameObject player;
-    public float distanse;
+    public bool isDead;
+    public GameObject[] attackRange;
+    public RaycastHit hit;
+    public LayerMask playerMask;
+
+
     public float Hp
     {
         get { return hp; }
@@ -20,6 +26,7 @@ public class Monster : MonoBehaviour, IHitable
             hp = value;
             if (hp <= 0)
             {
+                isDead = true;
                 SetState(new M_DieState(gameObject));
             }
         }
@@ -52,10 +59,17 @@ public class Monster : MonoBehaviour, IHitable
         curState.Enter();
     }
 
-    public float SetDistanse()
+    public RaycastHit HitAttackTarget(GameObject RangeObject)
     {
-        distanse = Vector3.Distance(transform.position, player.transform.position);
-        return distanse;
+        poss = RangeObject.GetComponentsInChildren<Transform>();
+        for (int i =1; i<poss.Length-1;i++)
+        {
+            Vector3 dir = poss[i + 1].position - poss[i].position;
+            Debug.DrawRay(poss[i].position, dir, Color.red, 1);
+            Physics.BoxCast(poss[i].position, new Vector3(1, 1, 1), dir, out hit, Quaternion.Euler(0,0,0),10,playerMask);
+        }
+        Debug.Log(hit.transform.name);
+        return hit;
     }
 
     public void Hit(float damage)

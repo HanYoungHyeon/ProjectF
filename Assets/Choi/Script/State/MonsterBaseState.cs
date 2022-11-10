@@ -7,8 +7,8 @@ public class MonsterBaseState : BaseState
     public Monster monster;
     public MonsterBaseState(GameObject gameObject) : base(gameObject)
     {
-        this.gameObject = gameObject;
-        monster = this.gameObject.GetComponent<Monster>();
+        this.gameObj = gameObject;
+        monster = this.gameObj.GetComponent<Monster>();
     }
 
     public override void Enter()
