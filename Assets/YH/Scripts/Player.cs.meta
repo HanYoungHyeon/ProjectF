@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Choi/Script/GreenMonster.cs.meta
+guid: edcdc226957c14e4a86484a00e4f8b2d
+========
+guid: 0010092ba7639c64cb180d9bd069cf8d
+>>>>>>>> YH:Assets/YH/Scripts/Player.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
