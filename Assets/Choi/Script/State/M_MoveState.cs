@@ -7,9 +7,4 @@ public class M_MoveState : MonsterBaseState
     public M_MoveState(GameObject gameObject) : base(gameObject)
     {
     }
-
-    public override void Update()
-    {
-        
-    }
 }

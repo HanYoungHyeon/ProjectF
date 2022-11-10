@@ -9,7 +9,7 @@ public class TEST : MonoBehaviour, IHitable
 
     private void Start()
     {
-        Hp = 1000;
+        Hp = 10;
     }
     public void Hit(float damage)
     {
