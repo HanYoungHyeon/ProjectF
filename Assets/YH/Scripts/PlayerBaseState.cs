@@ -102,6 +102,7 @@ public class PlayerAttackTwoState : PlayerBaseState
     public override void Enter()
     {
         player.isAttackOver = false;
+        player.Atk += 5;
         animator.SetTrigger("Attack2");
     }
     public override void Update()
@@ -119,6 +120,7 @@ public class PlayerAttackTwoState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.Atk -= 5;
         player.isAttackOver = true;
     }
 }
@@ -131,6 +133,7 @@ public class PlayerAttackThreeState : PlayerBaseState
     }
     public override void Enter()
     {
+        player.Atk += 10;
         player.isAttackOver = false;
         animator.SetTrigger("Attack3");
     }
@@ -145,6 +148,7 @@ public class PlayerAttackThreeState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.Atk -= 10;
         player.isAttackOver = true;
     }
 }

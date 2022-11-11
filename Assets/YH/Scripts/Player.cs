@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     private float axisX;
     private float axisZ;
     private float moveSpeed;
-    private float maxhp;
+    public float maxhp;
+    public float minAtk;
+    public float minDef;
     public bool isHit;
     public bool isAttackOver;
     public bool isGuardOver;
@@ -22,23 +24,43 @@ public class Player : MonoBehaviour
     private PlayerRollState playerRollState;
     private PlayerHitState playerHitState;
     private PlayerDieState playerDieState;
-    [SerializeField]
     private float hp;
     public float Hp
     {
         get { return hp; }
         set 
-        { hp = value; 
-            if(hp < maxhp && isHit == false)
+        {
+            if (isGuardOver == false)
+                return;
+            if (hp < maxhp && isHit == false)
             {
+                hp = value / def;
                 isHit = true;
                 SetState(playerHitState);
+                if (hp <= 0)
+                {
+                    SetState(playerDieState);
+                    hp = maxhp;
+                }
             }
-            if(hp<=0)
-            {
-                SetState(playerDieState);
-                hp = maxhp;
-            }
+        }
+    }
+    private float atk;
+    public float Atk
+    {
+        get { return atk; }
+        set 
+        {
+            atk = value;
+        }
+    }
+    private float def;
+    public float Def
+    {
+        get { return def; }
+        set 
+        { 
+            def = value;
         }
     }
     public void SetState(IStater input)
@@ -54,6 +76,10 @@ public class Player : MonoBehaviour
     {
         maxhp = 100;
         hp = maxhp;
+        minAtk = 1;
+        atk = minAtk;
+        minDef = 1;
+        def = minDef;
         moveSpeed = 5f;
         isAttackOver = true;
         isGuardOver = true;
@@ -73,6 +99,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(Atk);
         curState.Update();
         Move();
         Attack();
@@ -88,6 +115,7 @@ public class Player : MonoBehaviour
         if (moveInput.magnitude > 0 && isAttackOver)
         {
             character.Move(moveInput * moveSpeed * Time.deltaTime);
+            gameObject.transform.forward = moveInput;
             SetState(playerWalkState);
         }
     }
