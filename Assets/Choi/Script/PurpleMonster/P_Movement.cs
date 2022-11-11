@@ -41,8 +41,8 @@ public class P_Movement : M_MoveState
     public override void Exit()
     {
         p_monster.animator.SetFloat("Speed", 0);
+        p_monster.speed = 0;
     }
-
 }
 
 public class P2_Movement : P_Movement

@@ -12,4 +12,9 @@ public class GrayMonster : Monster
         gr_movement = new Gr_Movement(gameObject);
         gr_attack = new Gr_Attack(gameObject);
     }
+
+    private void Update()
+    {
+        curState.Update();
+    }
 }

@@ -31,5 +31,6 @@ public class G_MoveState : M_MoveState
     public override void Exit()
     {
         monster.animator.SetFloat("Speed", 0);
+        monster.speed = 0;
     }
 }

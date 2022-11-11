@@ -10,7 +10,6 @@ public class M_DieState : MonsterBaseState
     public override void Enter()
     {
         monster.animator.SetTrigger("Die");
-        monster.speed = 0;
     }
     public override void Update()
     {
