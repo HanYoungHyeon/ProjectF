@@ -23,8 +23,8 @@ public class GreenMonsterAttack : M_AttackState
 
     public override void Exit()
     {
-        greenMonster.count++;
         monster.attackCols[0].enabled = false;
+        greenMonster.count++;
     }
 }
 
