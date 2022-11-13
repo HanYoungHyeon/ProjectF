@@ -21,7 +21,7 @@ public class G_MoveState : M_MoveState
         Vector3 toPlayerVec = greenMonster.player.transform.position - greenMonster.transform.position;
         greenMonster.transform.forward = toPlayerVec;
         Vector3 targetVec = (greenMonster.player.transform.position - greenMonster.transform.position).normalized;
-        greenMonster.monsterController.SimpleMove(targetVec);
+        greenMonster.monsterController.SimpleMove(targetVec * monster.speed);
         if(Vector3.Distance(greenMonster.player.transform.position, greenMonster.transform.position) < 7f)
         {
             greenMonster.SetState(greenMonster.g_Attack);
@@ -31,5 +31,6 @@ public class G_MoveState : M_MoveState
     public override void Exit()
     {
         monster.animator.SetFloat("Speed", 0);
+        monster.speed = 0;
     }
 }

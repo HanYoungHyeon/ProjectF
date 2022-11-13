@@ -7,4 +7,5 @@ public class M_ScriptableObject : ScriptableObject
 {
     public float atk;
     public float hp;
+    public float speed;
 }

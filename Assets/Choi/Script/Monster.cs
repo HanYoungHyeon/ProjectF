@@ -7,11 +7,11 @@ public class Monster : MonoBehaviour, IHitable
 {
     private float hp;
     public float atk;
+    public float speed;
     public M_ScriptableObject scriptable;
     public Animator animator;
     public CharacterController monsterController;
     public GameObject player;
-    public bool isDead;
 
     public Collider[] attackCols;
 
@@ -23,7 +23,6 @@ public class Monster : MonoBehaviour, IHitable
             hp = value;
             if (hp <= 0)
             {
-                isDead = true;
                 SetState(new M_DieState(gameObject));
             }
         }
@@ -43,6 +42,7 @@ public class Monster : MonoBehaviour, IHitable
     {
         Hp = scriptable.hp;
         atk = scriptable.atk;
+        speed = scriptable.speed;
     }
 
     public void SetState(IStater input)

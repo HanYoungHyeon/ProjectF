@@ -9,7 +9,7 @@ public class M_DieState : MonsterBaseState
     }
     public override void Enter()
     {
-        monster.animator.SetBool("isDie", monster.isDead);
+        monster.animator.SetTrigger("Die");
     }
     public override void Update()
     {
