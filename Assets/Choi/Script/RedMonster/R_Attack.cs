@@ -69,6 +69,7 @@ public class R_FlameAttack : R_Attack
         r_monster.animator.SetTrigger("FlameAttack");
         r_monster.attackCols[2].enabled = true;
         r_monster.StartCor(2);
+        r_monster.isFlameCool = false;
         r_monster.r_attack = new R_Attack(gameObj);
         for(int i =0; i< r_monster.particles.Length;i++)
         {
@@ -78,7 +79,7 @@ public class R_FlameAttack : R_Attack
 
     public override void Update()
     {
-        if (r_monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f && r_monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Flame Attack"))
+        if (r_monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f && r_monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Flame Attack"))
         {
             r_monster.SetState(r_monster.r_movement);
         }

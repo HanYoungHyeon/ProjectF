@@ -22,6 +22,7 @@ public class RedMonster : Monster
         r_movement = new R_Movement(gameObject);
         r_scream = new R_Scream(gameObject);
         isAngry = false;
+        isFlameCool = true;
         isCool = true;
         SetState(r_movement);
         phaseHp = (scriptable.hp / 100)*30;
