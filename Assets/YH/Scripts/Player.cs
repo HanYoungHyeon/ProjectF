@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private Slider hpBar;
+    [SerializeField]
+    private TextMeshProUGUI hpText;
     private CharacterController character;
     private float axisX;
     private float axisZ;
@@ -12,6 +18,9 @@ public class Player : MonoBehaviour
     public float maxhp;
     public float minAtk;
     public float minDef;
+    public float hpRecovery;
+    public float secondAtk;
+    public float thirdAtk;
     public bool isHit;
     public bool isAttackOver;
     public bool isGuardOver;
@@ -24,6 +33,7 @@ public class Player : MonoBehaviour
     private PlayerRollState playerRollState;
     private PlayerHitState playerHitState;
     private PlayerDieState playerDieState;
+    private WaitForSeconds fiveSeconds;
     private float hp;
     public float Hp
     {
@@ -32,9 +42,11 @@ public class Player : MonoBehaviour
         {
             if (isGuardOver == false)
                 return;
-            if (hp < maxhp && isHit == false)
+            if (hp < maxhp && isHit == false && value < 0)
             {
                 hp = value / def;
+                hpBar.value = hp;
+                hpText.text = "HP : "+ hp;
                 isHit = true;
                 SetState(playerHitState);
                 if (hp <= 0)
@@ -42,6 +54,11 @@ public class Player : MonoBehaviour
                     SetState(playerDieState);
                     hp = maxhp;
                 }
+            }
+            if(value > 0)
+            {
+                hp = value;
+                hpBar.value = hp;
             }
         }
     }
@@ -76,11 +93,14 @@ public class Player : MonoBehaviour
     {
         maxhp = 100;
         hp = maxhp;
+        hpText.text = "HP : " + hp;
         minAtk = 1;
         atk = minAtk;
         minDef = 1;
         def = minDef;
         moveSpeed = 5f;
+        hpRecovery = 0f;
+        fiveSeconds = new WaitForSeconds(5f);
         isAttackOver = true;
         isGuardOver = true;
         isHit = false;
@@ -96,15 +116,16 @@ public class Player : MonoBehaviour
     private void Start()
     {
         SetState(playerIdleState);
+        StartCoroutine(HpRecovery());
     }
     private void Update()
     {
-        Debug.Log(Atk);
         curState.Update();
         Move();
         Attack();
         Shield();
         Roll();
+        hpBar.maxValue = maxhp;
     }
     private void Move()
     {
@@ -140,6 +161,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             SetState(playerRollState);
+        }
+    }
+    IEnumerator HpRecovery()
+    {
+        while (true)
+        {
+            yield return fiveSeconds;
+            Hp += hpRecovery;
         }
     }
 }

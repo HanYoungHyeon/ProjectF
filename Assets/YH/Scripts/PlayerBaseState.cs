@@ -31,7 +31,6 @@ public class PlayerIdleState : PlayerBaseState
     }
     public override void Update()
     {
-        Debug.Log("Idle");
     }
     public override void Exit()
     {
@@ -51,7 +50,6 @@ public class PlayerWalkState : PlayerBaseState
     }
     public override void Update()
     {
-        Debug.Log("Walk");
         if(player.moveInput.magnitude == 0 && player.isAttackOver == true)
         {
             player.SetState(new PlayerIdleState(player.gameObject));
@@ -83,7 +81,6 @@ public class PlayerAttackState : PlayerBaseState
         }
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
             {
-                Debug.Log("어택끝난거맞나?");
                 player.SetState(new PlayerIdleState(player.gameObject));
             }
     }
@@ -95,14 +92,16 @@ public class PlayerAttackState : PlayerBaseState
 public class PlayerAttackTwoState : PlayerBaseState
 {
     public Animator animator;
+    public float playerSecondAtk;
     public PlayerAttackTwoState(GameObject game) : base(game)
     {
         animator = player.GetComponent<Animator>();
-    }
+        playerSecondAtk = player.secondAtk;
+}
     public override void Enter()
     {
         player.isAttackOver = false;
-        player.Atk += 5;
+        player.Atk += playerSecondAtk;
         animator.SetTrigger("Attack2");
     }
     public override void Update()
@@ -114,26 +113,27 @@ public class PlayerAttackTwoState : PlayerBaseState
         }
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
-            Debug.Log("어택끝난거맞나?");
             player.SetState(new PlayerIdleState(player.gameObject));
         }
     }
     public override void Exit()
     {
-        player.Atk -= 5;
+        player.Atk -= playerSecondAtk;
         player.isAttackOver = true;
     }
 }
 public class PlayerAttackThreeState : PlayerBaseState
 {
+    public float playerThirdAtk;
     public Animator animator;
     public PlayerAttackThreeState(GameObject game) : base(game)
     {
         animator = player.GetComponent<Animator>();
+        playerThirdAtk = player.thirdAtk;
     }
     public override void Enter()
     {
-        player.Atk += 10;
+        player.Atk += playerThirdAtk;
         player.isAttackOver = false;
         animator.SetTrigger("Attack3");
     }
@@ -142,13 +142,12 @@ public class PlayerAttackThreeState : PlayerBaseState
 
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
-            Debug.Log("어택끝난거맞나?");
             player.SetState(new PlayerIdleState(player.gameObject));
         }
     }
     public override void Exit()
     {
-        player.Atk -= 10;
+        player.Atk -= playerThirdAtk;
         player.isAttackOver = true;
     }
 }
@@ -165,7 +164,6 @@ public class PlayerShieldState : PlayerBaseState
     }
     public override void Update()
     {
-        Debug.Log("Shield");
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
             player.SetState(new PlayerIdleState(player.gameObject));
@@ -211,7 +209,6 @@ public class PlayerHitState : PlayerBaseState
     }
     public override void Update()
     {
-        Debug.Log("Hit");
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
             player.SetState(new PlayerIdleState(player.gameObject));

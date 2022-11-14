@@ -5,11 +5,13 @@ using System;
 using TMPro;
 public class Shop : MonoBehaviour
 {
+    public Player player;
     [SerializeField]
     private GameObject shopCanvas;
     [SerializeField]
     private GameObject itemManager;
     public Action getItem;
+
     private void Awake()
     {
         itemManager.SetActive(true);
@@ -23,4 +25,5 @@ public class Shop : MonoBehaviour
     {
         shopCanvas.SetActive(false);
     }
+
 }
