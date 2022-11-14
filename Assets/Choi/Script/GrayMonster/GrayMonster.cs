@@ -26,7 +26,7 @@ public class GrayMonster : Monster
 
     private void Update()
     {
-        if(Hp <= phaseHp)
+        if(Hp <= phaseHp && !isAngry)
         {
             isAngry=true;
             gr_movement = new Gr2_Movenent(gameObject);

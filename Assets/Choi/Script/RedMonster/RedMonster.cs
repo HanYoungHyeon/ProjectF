@@ -8,7 +8,10 @@ public class RedMonster : Monster
     public R_Movement r_movement;
     public R_Scream r_scream;
     public bool isCool;
+    public bool isFlameCool;
     public bool isAngry;
+
+    IEnumerator startCo;
 
     float phaseHp;
 
@@ -24,21 +27,36 @@ public class RedMonster : Monster
     }
     private void Update()
     {
-        if(Hp <= phaseHp)
+        if(Hp <= phaseHp && !isAngry)
         {
             SetState(r_scream);
+            r_movement = new R_2Movement(gameObject);
         }
         curState.Update();
     }
 
-    public void StartCor()
+    public void StartCor(int num)
     {
-
+        if(num ==1)
+        {
+            startCo = ClawSkillCool();
+        }
+        else
+        {
+            startCo = FlameSkillCool();
+        }
+        StartCoroutine(startCo);
     }
 
-    public IEnumerator SkillCoolTimeCor(float time)
+    public IEnumerator ClawSkillCool()
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(7);
         isCool = true;
+    }
+
+    public IEnumerator FlameSkillCool()
+    {
+        yield return new WaitForSeconds(15);
+        isFlameCool = true;
     }
 }

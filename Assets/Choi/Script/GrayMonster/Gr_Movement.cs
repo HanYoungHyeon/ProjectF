@@ -17,10 +17,9 @@ public class Gr_Movement : M_MoveState
 
     public override void Update()
     {
-        Vector3 toPlayerVec = gr_monster.player.transform.position - gr_monster.transform.position;
+        Vector3 toPlayerVec = (gr_monster.player.transform.position - gr_monster.transform.position).normalized;
         gr_monster.transform.forward = toPlayerVec;
-        Vector3 targetVec = (gr_monster.player.transform.position - gr_monster.transform.position).normalized;
-        gr_monster.monsterController.SimpleMove(targetVec * monster.speed);
+        gr_monster.monsterController.SimpleMove(toPlayerVec * monster.speed);
         if (Vector3.Distance(gr_monster.player.transform.position, gr_monster.transform.position) < 4f)
         {
             if (gr_monster.isCool)

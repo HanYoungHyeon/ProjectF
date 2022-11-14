@@ -30,9 +30,19 @@ public class R_Movement : M_MoveState
             else
             {
                 r_monster.r_attack = new R_Attack(gameObj);
-            }
-            r_monster.SetState(r_monster.r_attack);
+            }            
         }
+        else
+        {
+            if (!r_monster.isAngry)
+                return;
+
+            if (!r_monster.isFlameCool)
+                return;
+
+            r_monster.r_attack = new R_FlameAttack(gameObj);
+        }
+        r_monster.SetState(r_monster.r_attack);
     }
 
     public override void Exit()

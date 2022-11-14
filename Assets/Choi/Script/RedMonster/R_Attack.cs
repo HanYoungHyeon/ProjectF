@@ -16,6 +16,18 @@ public class R_Attack : M_AttackState
         r_monster.animator.SetTrigger("Attack");
         r_monster.attackCols[0].enabled = true;
     }
+    public override void Update()
+    {
+        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            monster.SetState(r_monster.r_movement);
+        }
+    }
+
+    public override void Exit()
+    {
+        r_monster.attackCols[0].enabled = false;
+    }
 }
 
 public class R_ClawAttack : R_Attack
@@ -31,6 +43,11 @@ public class R_ClawAttack : R_Attack
         target.forward = target.position - r_monster.transform.position;
         r_monster.animator.SetTrigger("ClawAttack");
         r_monster.attackCols[1].enabled = true;
+        r_monster.StartCor(1);
+    }
+    public override void Exit()
+    {
+        r_monster.attackCols[1].enabled = false;
     }
 }
 
@@ -43,5 +60,11 @@ public class R_FlameAttack : R_Attack
     {
         r_monster.animator.SetTrigger("FlameAttack");
         r_monster.attackCols[2].enabled = true;
+        r_monster.StartCor(2);
+        r_monster.r_attack = new R_Attack(gameObj);
+    }
+    public override void Exit()
+    {
+        r_monster.attackCols[2].enabled = false;
     }
 }
