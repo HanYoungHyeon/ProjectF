@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour,IHitable
 {
     [SerializeField]
     private Slider hpBar;
@@ -170,6 +170,14 @@ public class Player : MonoBehaviour
             yield return fiveSeconds;
             Hp += hpRecovery;
         }
+    }
+    public void Attack(IHitable enemy)
+    {
+        enemy.Hit(atk);
+    }
+    public void Hit(float damage)
+    {
+        Hp -= damage;
     }
 }
 
