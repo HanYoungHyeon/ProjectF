@@ -8,7 +8,7 @@ public class R_Movement : M_MoveState
     public R_Movement(GameObject gameObject) : base(gameObject)
     {
         gameObj = gameObject;
-        r_monster = gameObj.AddComponent<RedMonster>();
+        r_monster = gameObj.GetComponent<RedMonster>();
     }
     public override void Enter()
     {
@@ -20,7 +20,7 @@ public class R_Movement : M_MoveState
         Vector3 toPlayerVec = (r_monster.player.transform.position - r_monster.transform.position).normalized;
         r_monster.transform.forward = toPlayerVec;
         r_monster.monsterController.SimpleMove(toPlayerVec * monster.speed);
-        if (Vector3.Distance(r_monster.player.transform.position, r_monster.transform.position) < 4f)
+        if (Vector3.Distance(r_monster.player.transform.position, r_monster.transform.position) < 7f)
         {
             if(r_monster.isCool)
             {
@@ -30,7 +30,7 @@ public class R_Movement : M_MoveState
             else
             {
                 r_monster.r_attack = new R_Attack(gameObj);
-            }            
+            }
         }
         else
         {
@@ -48,7 +48,6 @@ public class R_Movement : M_MoveState
     public override void Exit()
     {
         r_monster.animator.SetFloat("Speed", 0);
-        r_monster.speed = 0;
     }
 }
 public class R_2Movement : R_Movement

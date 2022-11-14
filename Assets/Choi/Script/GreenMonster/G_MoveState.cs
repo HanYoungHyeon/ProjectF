@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class G_MoveState : M_MoveState
@@ -7,8 +8,8 @@ public class G_MoveState : M_MoveState
     GreenMonster greenMonster;
     public G_MoveState(GameObject gameObject) : base(gameObject)
     {
-        this.gameObj = gameObject;
-        greenMonster = this.gameObj.GetComponent<GreenMonster>();
+        gameObj = gameObject;
+        greenMonster = gameObj.GetComponent<GreenMonster>();
     }
 
     public override void Enter()
@@ -18,19 +19,25 @@ public class G_MoveState : M_MoveState
 
     public override void Update()
     {
-        Vector3 toPlayerVec = greenMonster.player.transform.position - greenMonster.transform.position;
+        Vector3 toPlayerVec = (greenMonster.player.transform.position - greenMonster.transform.position).normalized;
         greenMonster.transform.forward = toPlayerVec;
-        Vector3 targetVec = (greenMonster.player.transform.position - greenMonster.transform.position).normalized;
-        greenMonster.monsterController.SimpleMove(targetVec * monster.speed);
-        if(Vector3.Distance(greenMonster.player.transform.position, greenMonster.transform.position) < 7f)
+        greenMonster.monsterController.SimpleMove(toPlayerVec * monster.speed);
+        if(Vector3.Distance(greenMonster.player.transform.position, greenMonster.transform.position) < 5f)
         {
+            if(greenMonster.isRush)
+            {
+                greenMonster.g_Attack = new GreenMonsterRushAttack(gameObj);
+            }
+            else
+            {
+                greenMonster.g_Attack = new GreenMonsterAttack(gameObj);
+            }
             greenMonster.SetState(greenMonster.g_Attack);
         }
     }
 
     public override void Exit()
     {
-        monster.animator.SetFloat("Speed", 0);
-        monster.speed = 0;
+        greenMonster.animator.SetFloat("Speed", 0);
     }
 }

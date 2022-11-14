@@ -20,7 +20,7 @@ public class Gr_Movement : M_MoveState
         Vector3 toPlayerVec = (gr_monster.player.transform.position - gr_monster.transform.position).normalized;
         gr_monster.transform.forward = toPlayerVec;
         gr_monster.monsterController.SimpleMove(toPlayerVec * monster.speed);
-        if (Vector3.Distance(gr_monster.player.transform.position, gr_monster.transform.position) < 4f)
+        if (Vector3.Distance(gr_monster.player.transform.position, gr_monster.transform.position) < 5.5f)
         {
             if (gr_monster.isCool)
             {
@@ -46,7 +46,6 @@ public class Gr_Movement : M_MoveState
     public override void Exit()
     {
         gr_monster.animator.SetFloat("Speed", 0);
-        gr_monster.speed = 0;
     }
 }
 

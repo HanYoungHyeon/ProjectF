@@ -19,7 +19,7 @@ public class P_Attack : M_AttackState
 
     public override void Update()
     {
-        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f && monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Basic Attack"))
         {
             monster.SetState(p_monster.p_movement);
         }
@@ -42,11 +42,12 @@ public class P_TailAttack : P_Attack
     {
         p_monster.animator.SetTrigger("TailAttack");
         p_monster.attackCols[1].enabled = true;
+        p_monster.StartCor();
     }
 
     public override void Update()
     {
-        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f && monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Tail Attack"))
         {
             monster.SetState(p_monster.p_movement);
         }

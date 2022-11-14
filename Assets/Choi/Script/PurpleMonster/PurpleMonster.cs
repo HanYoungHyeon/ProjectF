@@ -13,6 +13,8 @@ public class PurpleMonster : Monster
     public bool isTailCool = true;
     public ParticleSystem[] phaseParts;
 
+    float phaseTwo;
+
     public IEnumerator tailcor;
     private void Start()
     {
@@ -22,11 +24,13 @@ public class PurpleMonster : Monster
 
         SetState(p_movement);
         selfHell = 30;
+
+        phaseTwo = (scriptable.hp / 100) * 20;
     }
 
     private void Update()
     {
-        if(Hp <=20 && isDoSelfHell)
+        if(Hp <= phaseTwo && isDoSelfHell)
         {
             SetStratagy();
             SetState(p_scream);

@@ -19,7 +19,7 @@ public class Gr_Attack : M_AttackState
 
     public override void Update()
     {
-        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (gr_monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f && gr_monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Basic Attack"))
         {
             monster.SetState(gr_monster.gr_movement);
         }
@@ -37,16 +37,16 @@ public class Gr_ClawAttack : Gr_Attack
     }
     public override void Enter()
     {
-        gr_monster.animator.SetTrigger("Attack");
+        gr_monster.animator.SetTrigger("ClawAttack");
         gr_monster.attackCols[1].enabled = true;
         gr_monster.attackCols[2].enabled = true;
     }
 
     public override void Update()
     {
-        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (gr_monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f && gr_monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Claw Attack"))
         {
-            monster.SetState(gr_monster.gr_movement);
+            gr_monster.SetState(gr_monster.gr_movement);
         }
     }
 
@@ -74,9 +74,9 @@ public class Gr_FlameAttack : Gr_Attack
     }
     public override void Update()
     {
-        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (gr_monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f && gr_monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Flame Attack"))
         {
-            monster.SetState(gr_monster.gr_movement);
+            gr_monster.SetState(gr_monster.gr_movement);
         }
     }
 

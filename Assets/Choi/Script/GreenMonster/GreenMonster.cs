@@ -6,25 +6,32 @@ public class GreenMonster : Monster
 {
     public G_MoveState g_MoveState;
     public GreenMonsterAttack g_Attack;
-    public GreenMonsterRushAttack g_RushAttack;
-    public int count;
+    public bool isRush;
+
+    IEnumerator skillCor;
     private void Start()
     {
         g_MoveState = new G_MoveState(gameObject);
         g_Attack = new GreenMonsterAttack(gameObject);
-        g_RushAttack = new GreenMonsterRushAttack(gameObject);
-        count = 0;
+        isRush = true;
+        skillCor = SkillCool();
+
         SetState(g_MoveState);
     }
     private void Update()
     {
-        Debug.Log(count);
-        if (count >= 4)
-        {
-            SetState(g_RushAttack);
-            count = 0;
-        }
         curState.Update();
+    }
+
+    public void StartCor()
+    {
+        StartCoroutine(skillCor);
+    }
+
+    public IEnumerator SkillCool()
+    {
+        yield return new WaitForSeconds(7);
+        isRush = true;
     }
 
 }

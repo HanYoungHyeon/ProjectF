@@ -13,6 +13,8 @@ public class Monster : MonoBehaviour, IHitable
     public CharacterController monsterController;
     public GameObject player;
 
+    public Collider monsterCol;
+
     public Collider[] attackCols;
 
     public float Hp
@@ -35,6 +37,7 @@ public class Monster : MonoBehaviour, IHitable
     {
         animator = GetComponent<Animator>();
         monsterController = GetComponent<CharacterController>();
+        monsterCol = GetComponent<Collider>();
         player = GameObject.Find("Player");
         SetStaters();
     }

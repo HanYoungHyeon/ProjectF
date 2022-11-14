@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc0c575d033eb0409a90ba2aecb5506, type: 3}
   m_Name: Purple
   m_EditorClassIdentifier: 
-  atk: 10
-  hp: 100
+  atk: 12
+  hp: 120
   speed: 1

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Gray
   m_EditorClassIdentifier: 
   atk: 15
-  hp: 100
+  hp: 140
   speed: 1

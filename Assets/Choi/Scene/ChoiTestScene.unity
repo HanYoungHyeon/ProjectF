@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44804454, g: 0.49805456, b: 0.5755221, a: 1}
+  m_IndirectSpecularColor: {r: 0.44804436, g: 0.49805433, b: 0.5755216, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -238,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 489222, guid: e8c61f653ab1b834b88dc949047967a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.125387
+      value: 7.97
       objectReference: {fileID: 0}
     - target: {fileID: 489222, guid: e8c61f653ab1b834b88dc949047967a5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -246,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 489222, guid: e8c61f653ab1b834b88dc949047967a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.23556995
+      value: -3.55
       objectReference: {fileID: 0}
     - target: {fileID: 489222, guid: e8c61f653ab1b834b88dc949047967a5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1288963518, guid: e8c61f653ab1b834b88dc949047967a5, type: 3}
+      propertyPath: scriptable
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f12f00b6526b434d9cd28251f7cb3cc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c61f653ab1b834b88dc949047967a5, type: 3}
 --- !u!1 &995765814
@@ -383,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409426, guid: 71834e7e2d4cddd4f8973b6363e92025, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2535148
+      value: 7.11
       objectReference: {fileID: 0}
     - target: {fileID: 409426, guid: 71834e7e2d4cddd4f8973b6363e92025, type: 3}
       propertyPath: m_LocalPosition.y
@@ -391,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409426, guid: 71834e7e2d4cddd4f8973b6363e92025, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.3613687
+      value: -4.88
       objectReference: {fileID: 0}
     - target: {fileID: 409426, guid: 71834e7e2d4cddd4f8973b6363e92025, type: 3}
       propertyPath: m_LocalRotation.w
@@ -457,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
+  monster: {fileID: 1985242627}
 --- !u!65 &1470088939
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -528,7 +533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470088937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.18, y: 2.12, z: 7.1}
+  m_LocalPosition: {x: 9.61, y: 2.12, z: 7.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -684,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 485588, guid: f9b2c36027fc51a478c4bb251bac8f2b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.231179
+      value: 8.67
       objectReference: {fileID: 0}
     - target: {fileID: 485588, guid: f9b2c36027fc51a478c4bb251bac8f2b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -692,7 +697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 485588, guid: f9b2c36027fc51a478c4bb251bac8f2b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.6991196
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 485588, guid: f9b2c36027fc51a478c4bb251bac8f2b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -724,6 +729,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b2c36027fc51a478c4bb251bac8f2b, type: 3}
+--- !u!1 &1985242627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 139696, guid: f9b2c36027fc51a478c4bb251bac8f2b, type: 3}
+  m_PrefabInstance: {fileID: 1985242626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8541762488858651711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -783,5 +793,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4614367454241959123, guid: 85e1f6ac821df284cbbc491d2839cac9, type: 3}
+      propertyPath: scriptable
+      value: 
+      objectReference: {fileID: 11400000, guid: 1f7d849de2766624bb5790166b7d01a4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e1f6ac821df284cbbc491d2839cac9, type: 3}

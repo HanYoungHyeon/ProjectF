@@ -18,9 +18,9 @@ public class R_Attack : M_AttackState
     }
     public override void Update()
     {
-        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (r_monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f && r_monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Basic Attack"))
         {
-            monster.SetState(r_monster.r_movement);
+            r_monster.SetState(r_monster.r_movement);
         }
     }
 
@@ -45,6 +45,14 @@ public class R_ClawAttack : R_Attack
         r_monster.attackCols[1].enabled = true;
         r_monster.StartCor(1);
     }
+
+    public override void Update()
+    {
+        if (r_monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f && r_monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Claw Attack"))
+        {
+            r_monster.SetState(r_monster.r_movement);
+        }
+    }
     public override void Exit()
     {
         r_monster.attackCols[1].enabled = false;
@@ -62,6 +70,18 @@ public class R_FlameAttack : R_Attack
         r_monster.attackCols[2].enabled = true;
         r_monster.StartCor(2);
         r_monster.r_attack = new R_Attack(gameObj);
+        for(int i =0; i< r_monster.particles.Length;i++)
+        {
+            r_monster.particles[i].Play();
+        }
+    }
+
+    public override void Update()
+    {
+        if (r_monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f && r_monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Flame Attack"))
+        {
+            r_monster.SetState(r_monster.r_movement);
+        }
     }
     public override void Exit()
     {

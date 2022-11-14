@@ -10,6 +10,7 @@ public class RedMonster : Monster
     public bool isCool;
     public bool isFlameCool;
     public bool isAngry;
+    public ParticleSystem[] particles;
 
     IEnumerator startCo;
 
@@ -41,7 +42,7 @@ public class RedMonster : Monster
         {
             startCo = ClawSkillCool();
         }
-        else
+        else if( num == 2)
         {
             startCo = FlameSkillCool();
         }

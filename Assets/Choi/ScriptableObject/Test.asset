@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atk: 10
   hp: 10
+  speed: 1
