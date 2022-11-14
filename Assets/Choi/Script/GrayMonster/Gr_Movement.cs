@@ -23,6 +23,23 @@ public class Gr_Movement : M_MoveState
         gr_monster.monsterController.SimpleMove(targetVec * monster.speed);
         if (Vector3.Distance(gr_monster.player.transform.position, gr_monster.transform.position) < 4f)
         {
+            if (gr_monster.isCool)
+            {
+                gr_monster.isCool = false;
+                if (gr_monster.isAngry)
+                {
+                    gr_monster.gr_attack = new Gr_FlameAttack(gameObj);
+                }
+                else
+                {
+                    gr_monster.gr_attack = new Gr_ClawAttack(gameObj);
+                }
+                gr_monster.StartCor();
+            }
+            else
+            {
+                gr_monster.gr_attack = new Gr_Attack(gameObj);
+            }
             gr_monster.SetState(gr_monster.gr_attack);
         }
     }

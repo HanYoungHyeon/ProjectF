@@ -2841,6 +2841,10 @@ MonoBehaviour:
   - {fileID: 381111997638748771}
   - {fileID: 2276569469610574216}
   - {fileID: 1884950691977018386}
+  - {fileID: 820945584307269289}
+  particles: []
+  isAngry: 0
+  isCool: 0
 --- !u!1 &198178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3160,7 +3164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7991822e1e9f5ec468304b8837ff0933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
+  monster: {fileID: 1345051043}
 --- !u!136 &820945584307269289
 CapsuleCollider:
   m_ObjectHideFlags: 0

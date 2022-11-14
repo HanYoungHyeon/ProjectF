@@ -14,6 +14,7 @@ public class Gr_Attack : M_AttackState
     public override void Enter()
     {
         gr_monster.animator.SetTrigger("Attack");
+        gr_monster.attackCols[0].enabled = true;
     }
 
     public override void Update()
@@ -26,7 +27,7 @@ public class Gr_Attack : M_AttackState
 
     public override void Exit()
     {
-        base.Exit();
+        gr_monster.attackCols[0].enabled = false;
     }
 }
 public class Gr_ClawAttack : Gr_Attack
@@ -34,11 +35,53 @@ public class Gr_ClawAttack : Gr_Attack
     public Gr_ClawAttack(GameObject gameObject) : base(gameObject)
     {
     }
+    public override void Enter()
+    {
+        gr_monster.animator.SetTrigger("Attack");
+        gr_monster.attackCols[1].enabled = true;
+        gr_monster.attackCols[2].enabled = true;
+    }
+
+    public override void Update()
+    {
+        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            monster.SetState(gr_monster.gr_movement);
+        }
+    }
+
+    public override void Exit()
+    {
+        gr_monster.attackCols[1].enabled = false;
+        gr_monster.attackCols[2].enabled = false;
+    }
 }
 
 public class Gr_FlameAttack : Gr_Attack
 {
     public Gr_FlameAttack(GameObject gameObject) : base(gameObject)
     {
+    }
+
+    public override void Enter()
+    {
+        for(int i =0; i<gr_monster.particles.Length;i++)
+        {
+            gr_monster.particles[i].Play();
+        }
+        gr_monster.animator.SetTrigger("FlameAttack");
+        gr_monster.attackCols[3].enabled = true;
+    }
+    public override void Update()
+    {
+        if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            monster.SetState(gr_monster.gr_movement);
+        }
+    }
+
+    public override void Exit()
+    {
+        gr_monster.attackCols[3].enabled = false;
     }
 }
