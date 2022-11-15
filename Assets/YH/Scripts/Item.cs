@@ -21,18 +21,6 @@ public class Item : MonoBehaviour
         itemDic.Add(Data[8], HpRecoveryUp1); 
         itemDic.Add(Data[9], HpRecoveryUp2);
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("스페이스바");
-            foreach(KeyValuePair<ItemData,Action> item in itemDic)
-            {
-                Debug.Log(item.Value.Method.Name);
-            }
-        }
-        
-    }
     public void HpUp1()
     {
         player.maxhp += 50;

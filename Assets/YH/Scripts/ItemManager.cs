@@ -8,8 +8,4 @@ using TMPro;
 public class ItemManager : MonoBehaviour
 {
     public Player player;
-    
-    
-    
-    
 }
