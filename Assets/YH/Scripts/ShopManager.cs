@@ -39,11 +39,4 @@ public class ShopManager : MonoBehaviour
         wave = 0;
         curWave = wave;
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            shopCanvas.SetActive(true);
-        }
-    }
 }
