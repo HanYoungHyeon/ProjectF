@@ -27,7 +27,8 @@ public class PlayerIdleState : PlayerBaseState
     public override void Enter()
     {
         animator.SetBool("Idle", true);
-        
+        player.isAttackOver = true;
+        player.comboNumber = 0;
     }
     public override void Update()
     {
@@ -62,48 +63,51 @@ public class PlayerWalkState : PlayerBaseState
 }
 public class PlayerAttackState : PlayerBaseState
 {
+    public GameObject comboUI;
     public Animator animator;
     public PlayerAttackState(GameObject game) : base(game)
     {
         animator = player.GetComponent<Animator>();
+        comboUI = player.comboUI;
     }
     public override void Enter()
     {
-        player.isAttackOver = false;
         animator.SetTrigger("Attack");
     }
     public override void Update()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5)
-        { 
-           // player.SetState(new PlayerAttackTwoState(player.gameObject));
-        }
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5 && Input.GetKeyDown(KeyCode.Space))
         {
-            player.SetState(new PlayerAttackTwoState(player.gameObject));
+            comboUI.SetActive(true);
+            if(player.comboNumber == 1)
+            {
+                comboUI.SetActive(false);
+                player.SetState(new PlayerAttackTwoState(player.gameObject));
+            }
         }
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-            {
-                player.SetState(new PlayerIdleState(player.gameObject));
-            }
+        {
+            comboUI.SetActive(false);
+            player.SetState(new PlayerIdleState(player.gameObject));
+        }
     }
     public override void Exit()
     {
-        player.isAttackOver = true;
     }
 }
 public class PlayerAttackTwoState : PlayerBaseState
 {
+    public GameObject comboUI;
     public Animator animator;
     public float playerSecondAtk;
     public PlayerAttackTwoState(GameObject game) : base(game)
     {
         animator = player.GetComponent<Animator>();
         playerSecondAtk = player.secondAtk;
-}
+        comboUI = player.comboUI;
+    }
     public override void Enter()
     {
-        player.isAttackOver = false;
         player.Atk += playerSecondAtk;
         player.swordEffect.Play();
         animator.SetTrigger("Attack2");
@@ -111,12 +115,18 @@ public class PlayerAttackTwoState : PlayerBaseState
     public override void Update()
     {
 
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5 && Input.GetKeyDown(KeyCode.Space))
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5)
         {
-            player.SetState(new PlayerAttackThreeState(player.gameObject));
+            comboUI.SetActive(true);
+            if (player.comboNumber == 2)
+            {
+                comboUI.SetActive(false);
+                player.SetState(new PlayerAttackThreeState(player.gameObject));
+            }
         }
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
+            comboUI.SetActive(false);
             player.SetState(new PlayerIdleState(player.gameObject));
         }
     }
@@ -124,7 +134,6 @@ public class PlayerAttackTwoState : PlayerBaseState
     {
         player.swordEffect.Stop();
         player.Atk -= playerSecondAtk;
-        player.isAttackOver = true;
     }
 }
 public class PlayerAttackThreeState : PlayerBaseState
@@ -140,12 +149,10 @@ public class PlayerAttackThreeState : PlayerBaseState
     {
         player.swordEffect.Play();
         player.Atk += playerThirdAtk;
-        player.isAttackOver = false;
         animator.SetTrigger("Attack3");
     }
     public override void Update()
     {
-
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
             player.SetState(new PlayerIdleState(player.gameObject));
@@ -155,7 +162,6 @@ public class PlayerAttackThreeState : PlayerBaseState
     {
         player.swordEffect.Stop();
         player.Atk -= playerThirdAtk;
-        player.isAttackOver = true;
     }
 }
 public class PlayerShieldState : PlayerBaseState

@@ -12,10 +12,12 @@ public class Player : MonoBehaviour,IHitable
     [SerializeField]
     private TextMeshProUGUI hpText;
     private CharacterController character;
-    private float moveSpeed;
+    public GameObject comboUI;
     public ParticleSystem swordEffect;
     public ParticleSystem shieldEffect;
     public ParticleSystem hitEffect;
+    private float moveSpeed;
+    public float comboNumber;
     public float maxhp;
     public float minAtk;
     public float minDef;
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour,IHitable
     private PlayerIdleState playerIdleState;
     private PlayerWalkState playerWalkState;
     private PlayerAttackState playerAttackState;
+    private PlayerAttackTwoState playerAttackTwoState;
     private PlayerShieldState playerShieldState;
     private PlayerRollState playerRollState;
     private PlayerHitState playerHitState;
@@ -92,6 +95,7 @@ public class Player : MonoBehaviour,IHitable
     }
     private void Awake()
     {
+        comboNumber = 0;
         maxhp = 100;
         hp = maxhp;
         hpText.text = "HP : " + hp;
@@ -109,6 +113,7 @@ public class Player : MonoBehaviour,IHitable
         playerIdleState = new PlayerIdleState(this.gameObject);
         playerWalkState = new PlayerWalkState(this.gameObject);
         playerAttackState = new PlayerAttackState(this.gameObject);
+        playerAttackTwoState = new PlayerAttackTwoState(this.gameObject);
         playerShieldState = new PlayerShieldState(this.gameObject);
         playerHitState = new PlayerHitState(this.gameObject);
         playerDieState = new PlayerDieState(this.gameObject);
@@ -126,7 +131,6 @@ public class Player : MonoBehaviour,IHitable
     }
     public void Move(Vector3 inputDirection)
     {
-        
         if (isAttackOver)
         {
             character.Move(inputDirection * moveSpeed * Time.deltaTime);
@@ -136,8 +140,19 @@ public class Player : MonoBehaviour,IHitable
     }
     public void Attack()
     {
+        if (isAttackOver)
+        {
             isAttackOver = false;
             SetState(playerAttackState);
+        }
+        else if (!isAttackOver)
+        { 
+            comboNumber++;
+        }
+        else if(!isAttackOver && comboNumber == 1)
+        {
+            comboNumber++;
+        }
     }
     public void Shield()
     {

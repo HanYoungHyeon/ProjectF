@@ -25,8 +25,9 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         if(instance == null)
         {
             instance = this;
