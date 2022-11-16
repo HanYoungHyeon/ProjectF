@@ -122,7 +122,6 @@ public class Player : MonoBehaviour,IHitable
     private void Update()
     {
         curState.Update();
-
         hpBar.maxValue = maxhp;
     }
     public void Move(Vector3 inputDirection)
@@ -130,7 +129,7 @@ public class Player : MonoBehaviour,IHitable
         
         if (isAttackOver)
         {
-            character.Move(inputDirection * moveSpeed);
+            character.Move(inputDirection * moveSpeed * Time.deltaTime);
             gameObject.transform.forward = inputDirection;
             SetState(playerWalkState);
         }

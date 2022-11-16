@@ -17,7 +17,7 @@ public class JoyStick : MonoBehaviour,IPointerDownHandler,IPointerUpHandler,IDra
 
     private void Start()
     {
-        moveSpeed = 1f;
+        moveSpeed = 70f;
         radius = rectBackGround.rect.width * 0.5f;
     }
     private void Update()
@@ -36,11 +36,16 @@ public class JoyStick : MonoBehaviour,IPointerDownHandler,IPointerUpHandler,IDra
         float distance = Vector2.Distance(rectBackGround.position, rectJoyStcik.position) / radius;
         value = value.normalized;
         movePosition = new Vector3(value.x * moveSpeed * distance * Time.deltaTime, 0f, value.y * moveSpeed * distance * Time.deltaTime);
-        //Debug.Log(movePosition);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Vector2 value = eventData.position - (Vector2)rectBackGround.position;
+        value = Vector2.ClampMagnitude(value, radius);
+        rectJoyStcik.localPosition = value;
+        float distance = Vector2.Distance(rectBackGround.position, rectJoyStcik.position) / radius;
+        value = value.normalized;
+        movePosition = new Vector3(value.x * moveSpeed * distance * Time.deltaTime, 0f, value.y * moveSpeed * distance * Time.deltaTime);
         isTouch = true;
     }
 
@@ -49,5 +54,9 @@ public class JoyStick : MonoBehaviour,IPointerDownHandler,IPointerUpHandler,IDra
         isTouch = false;
         rectJoyStcik.localPosition = Vector3.zero;
         movePosition = Vector3.zero;
+    }
+    public void JoyStickMove()
+    {
+
     }
 }

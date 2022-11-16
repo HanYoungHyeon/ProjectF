@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class ShopManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static ShopManager instance;
+    private static GameManager instance;
     [SerializeField]
     private GameObject shopCanvas;
-    public ShopManager Instnace 
+    public GameManager Instnace 
     {
         get { return instance; }
     }

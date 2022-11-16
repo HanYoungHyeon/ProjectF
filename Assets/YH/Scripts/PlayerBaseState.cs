@@ -76,7 +76,7 @@ public class PlayerAttackState : PlayerBaseState
     {
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5)
         { 
-            player.SetState(new PlayerAttackTwoState(player.gameObject));
+           // player.SetState(new PlayerAttackTwoState(player.gameObject));
         }
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5 && Input.GetKeyDown(KeyCode.Space))
         {
