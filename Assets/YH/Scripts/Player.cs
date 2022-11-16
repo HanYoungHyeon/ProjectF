@@ -12,9 +12,10 @@ public class Player : MonoBehaviour,IHitable
     [SerializeField]
     private TextMeshProUGUI hpText;
     private CharacterController character;
-    private float axisX;
-    private float axisZ;
     private float moveSpeed;
+    public ParticleSystem swordEffect;
+    public ParticleSystem shieldEffect;
+    public ParticleSystem hitEffect;
     public float maxhp;
     public float minAtk;
     public float minDef;
@@ -121,47 +122,31 @@ public class Player : MonoBehaviour,IHitable
     private void Update()
     {
         curState.Update();
-        Move();
-        Attack();
-        Shield();
-        Roll();
         hpBar.maxValue = maxhp;
     }
-    private void Move()
+    public void Move(Vector3 inputDirection)
     {
-
-        axisX = Input.GetAxis("Horizontal");
-        axisZ = Input.GetAxis("Vertical");
-        moveInput = new Vector3(axisX, 0, axisZ);
-        if (moveInput.magnitude > 0 && isAttackOver)
+        
+        if (isAttackOver)
         {
-            character.Move(moveInput * moveSpeed * Time.deltaTime);
-            gameObject.transform.forward = moveInput;
+            character.Move(inputDirection * moveSpeed * Time.deltaTime);
+            gameObject.transform.forward = inputDirection;
             SetState(playerWalkState);
         }
     }
-    private void Attack()
+    public void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isAttackOver == true)
-        {
             isAttackOver = false;
             SetState(playerAttackState);
-        }
     }
-    private void Shield()
+    public void Shield()
     {
-        if(Input.GetKeyDown(KeyCode.C) && isGuardOver == true)
-        {
             isGuardOver = false;
             SetState(playerShieldState);
-        }
     }
-    private void Roll()
+    public void Roll()
     {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
             SetState(playerRollState);
-        }
     }
     IEnumerator HpRecovery()
     {
@@ -170,10 +155,6 @@ public class Player : MonoBehaviour,IHitable
             yield return fiveSeconds;
             Hp += hpRecovery;
         }
-    }
-    public void Attack(IHitable enemy)
-    {
-        enemy.Hit(atk);
     }
     public void Hit(float damage)
     {

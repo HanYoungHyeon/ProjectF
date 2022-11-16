@@ -74,7 +74,10 @@ public class PlayerAttackState : PlayerBaseState
     }
     public override void Update()
     {
-
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5)
+        { 
+           // player.SetState(new PlayerAttackTwoState(player.gameObject));
+        }
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5 && Input.GetKeyDown(KeyCode.Space))
         {
             player.SetState(new PlayerAttackTwoState(player.gameObject));
@@ -102,6 +105,7 @@ public class PlayerAttackTwoState : PlayerBaseState
     {
         player.isAttackOver = false;
         player.Atk += playerSecondAtk;
+        player.swordEffect.Play();
         animator.SetTrigger("Attack2");
     }
     public override void Update()
@@ -118,6 +122,7 @@ public class PlayerAttackTwoState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.swordEffect.Stop();
         player.Atk -= playerSecondAtk;
         player.isAttackOver = true;
     }
@@ -133,6 +138,7 @@ public class PlayerAttackThreeState : PlayerBaseState
     }
     public override void Enter()
     {
+        player.swordEffect.Play();
         player.Atk += playerThirdAtk;
         player.isAttackOver = false;
         animator.SetTrigger("Attack3");
@@ -147,6 +153,7 @@ public class PlayerAttackThreeState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.swordEffect.Stop();
         player.Atk -= playerThirdAtk;
         player.isAttackOver = true;
     }
@@ -161,6 +168,7 @@ public class PlayerShieldState : PlayerBaseState
     public override void Enter()
     {
         animator.SetTrigger("Shield");
+        player.shieldEffect.Play();
     }
     public override void Update()
     {
@@ -172,6 +180,7 @@ public class PlayerShieldState : PlayerBaseState
     public override void Exit()
     {
         player.isGuardOver = true;
+        player.shieldEffect.Stop();
     }
 }
 public class PlayerRollState : PlayerBaseState
@@ -205,6 +214,7 @@ public class PlayerHitState : PlayerBaseState
     }
     public override void Enter()
     {
+        player.hitEffect.Play();
         animator.SetTrigger("Hit");
     }
     public override void Update()
@@ -218,6 +228,7 @@ public class PlayerHitState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.hitEffect.Stop();
         player.isHit = false;
     }
 }
