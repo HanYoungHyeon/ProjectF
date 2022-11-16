@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class Item : MonoBehaviour
+public class Item : Singleton<Item>
 {
     public Player player;
     public ItemData[] Data;
     public Dictionary<ItemData, Action> itemDic = new Dictionary<ItemData, Action>();
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         itemDic.Add(Data[0], HpUp1); 
         itemDic.Add(Data[1], HpUp2);
         itemDic.Add(Data[2], AtkUp1);
