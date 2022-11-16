@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
-    private static GameManager instance;
     [SerializeField]
     private GameObject shopCanvas;
-    public GameManager Instnace 
-    {
-        get { return instance; }
-    }
-    private int wave;
+    
+    private int wave = 0;
     private int curWave;
     public int Wave
     {
         get { return wave; }
         set 
-        { 
-            wave = value; 
+        {
+            if(value > 4)
+            {
+                value = 4;
+            }
+            wave = value;
+
             if(wave != curWave)
             {
                 shopCanvas.SetActive(true);
@@ -25,18 +26,9 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
-    private void Awake()
+    private new void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        wave = 0;
-        curWave = wave;
+        base.Awake();
+        curWave = Wave;
     }
 }
